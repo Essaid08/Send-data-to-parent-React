@@ -6,12 +6,16 @@ export const Nav = ({sentToParent , user , sentCheckStateToParent}) => {
     const [filtredMostStared , setFiltredMostStared] = useState(false)
 
     const multipeChange = (ev) => {
+        // controll the input  and the parent input changes   
         const value = ev.target.value;
+        /* the value const is used to garantue that the inputValue state and the parent input state w
+        will recieve the latest changes due to the asynchrs behave of useState */  
         setInputValue(value);
         sentToParent(value); 
     }
 
     function handleChecked (e) {
+        // controll the checkState and the parent checkStatus 
         const chekState = e.target.checked ;
         setFiltredMostStared(chekState) ;
         sentCheckStateToParent(chekState)

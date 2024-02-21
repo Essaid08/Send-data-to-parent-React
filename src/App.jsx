@@ -7,8 +7,8 @@ const App = () => {
   const [userInput, setUserInput] = useState('')
   const [users, setUsers] = useState([])
   const [filtredMostStared , setFiltredMostStared] = useState(false)
-
-
+  
+  //recieve the input change  from child Nav
   const handleDataFromNavChild = (data) => {
     setUserInput(data);
   }
@@ -42,15 +42,20 @@ const App = () => {
     ).catch(err => console.error('Error fetching repositories:', err))
     
   }, [userInput]);
+   
+  //recieve the check status from the Nav child
 
   const handleChildCheck = (data) => {
+      // set the  data from child to the state 
       setFiltredMostStared(data)
   }
 
   return (
     <div className="px-16 gap-10 py-12 flex flex-col justify-center items-center h-full">
+      {/* set the callBacks functions as props in the Nav child and the recieve the data*/}
       <Nav sentToParent={handleDataFromNavChild} sentCheckStateToParent={handleChildCheck} user={users}/>
       <div className=" grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        {/*send the data from the state to the Cards child*/}
         <Cards checked={filtredMostStared} user={users} />
       </div>
     </div>
